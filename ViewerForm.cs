@@ -42,7 +42,12 @@ namespace DashboardNextPrevTab {
             e.Items.Insert(0, slideShowItem);
         }
         void SlideShowTimerTick(object sender, System.EventArgs e) {
-            ShowNextPrevTab(NextPrevValue.Next);
+            transitionManager.StartTransition(dashboardViewer);
+            try {
+                ShowNextPrevTab(NextPrevValue.Next);
+            } finally {
+                transitionManager.EndTransition();
+            }
         }
         void ShowNextPrevTab(NextPrevValue value) {
             TabContainerDashboardItem tabContainer = TabContainer;

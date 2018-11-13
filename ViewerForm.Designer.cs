@@ -13,8 +13,11 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
+            DevExpress.Utils.Animation.Transition transition1 = new DevExpress.Utils.Animation.Transition();
+            DevExpress.Utils.Animation.SlideFadeTransition slideFadeTransition1 = new DevExpress.Utils.Animation.SlideFadeTransition();
             this.dashboardViewer = new DevExpress.DashboardWin.DashboardViewer(this.components);
             this.imageCollection = new DevExpress.Utils.SvgImageCollection(this.components);
+            this.transitionManager = new DevExpress.Utils.Animation.TransitionManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dashboardViewer)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageCollection)).BeginInit();
             this.SuspendLayout();
@@ -42,6 +45,24 @@
             this.imageCollection.Add("Slideshow", "image://svgimages/icon builder/business_presentation.svg");
             this.imageCollection.Add("showcaption", "image://svgimages/dashboards/showcaption.svg");
             // 
+            // transitionManager
+            // 
+            this.transitionManager.ShowWaitingIndicator = false;
+            transition1.BarWaitingIndicatorProperties.Caption = "";
+            transition1.BarWaitingIndicatorProperties.Description = "";
+            transition1.Control = this.dashboardViewer;
+            transition1.LineWaitingIndicatorProperties.AnimationElementCount = 5;
+            transition1.LineWaitingIndicatorProperties.Caption = "";
+            transition1.LineWaitingIndicatorProperties.Description = "";
+            transition1.RingWaitingIndicatorProperties.AnimationElementCount = 5;
+            transition1.RingWaitingIndicatorProperties.Caption = "";
+            transition1.RingWaitingIndicatorProperties.Description = "";
+            slideFadeTransition1.Parameters.EffectOptions = DevExpress.Utils.Animation.PushEffectOptions.FromRight;
+            transition1.TransitionType = slideFadeTransition1;
+            transition1.WaitingIndicatorProperties.Caption = "";
+            transition1.WaitingIndicatorProperties.Description = "";
+            this.transitionManager.Transitions.Add(transition1);
+            // 
             // ViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -61,6 +82,7 @@
 
         private DevExpress.DashboardWin.DashboardViewer dashboardViewer;
         private DevExpress.Utils.SvgImageCollection imageCollection;
+        private DevExpress.Utils.Animation.TransitionManager transitionManager;
     }
 }
 
