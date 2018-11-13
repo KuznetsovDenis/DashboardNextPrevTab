@@ -2,67 +2,55 @@
 <Dashboard CurrencyCulture="en-US">
   <Title Text="Sales Dashboard" />
   <DataSources>
-    <SqlDataSource Name="SQL Data Source 1" ComponentName="dashboardSqlDataSource1">
-      <Connection Name="nwind" ProviderKey="Access97">
-        <Parameters>
-          <Parameter Name="database" Value="Data\nwind.mdb" />
-          <Parameter Name="read only" Value="1" />
-          <Parameter Name="generateConnectionHelper" Value="false" />
-          <Parameter Name="userid" Value="" />
-          <Parameter Name="password" Value="" />
-        </Parameters>
-      </Connection>
-      <Query Type="SelectQuery" Name="Categories">
-        <Tables>
-          <Table Name="Categories" X="30" Y="30" Width="125" Height="184" />
-          <Table Name="Products" X="185" Y="30" Width="125" Height="284" />
-          <Table Name="Order Details" X="340" Y="30" Width="125" Height="164" />
-          <Table Name="Orders" X="495" Y="30" Width="125" Height="344" />
-          <Table Name="Customers" X="650" Y="30" Width="125" Height="284" />
-          <Relation Type="Inner" Parent="Categories" Nested="Products">
-            <KeyColumn Parent="CategoryID" Nested="CategoryID" />
-          </Relation>
-          <Relation Type="Inner" Parent="Products" Nested="Order Details">
-            <KeyColumn Parent="ProductID" Nested="ProductID" />
-          </Relation>
-          <Relation Type="Inner" Parent="Order Details" Nested="Orders">
-            <KeyColumn Parent="OrderID" Nested="OrderID" />
-          </Relation>
-          <Relation Type="Inner" Parent="Orders" Nested="Customers">
-            <KeyColumn Parent="CustomerID" Nested="CustomerID" />
-          </Relation>
-        </Tables>
-        <Columns>
-          <Column Table="Categories" Name="CategoryName" />
-          <Column Table="Products" Name="ProductName" />
-          <Column Table="Products" Name="UnitPrice" />
-          <Column Table="Order Details" Name="Quantity" />
-          <Column Table="Orders" Name="OrderDate" />
-          <Column Table="Orders" Name="ShipRegion" />
-          <Column Table="Orders" Name="ShipCity" />
-          <Column Table="Orders" Name="ShipCountry" />
-          <Column Table="Customers" Name="CompanyName" />
-          <Column Table="Products" Name="UnitsOnOrder" />
-        </Columns>
-      </Query>
-      <ResultSchema>
-        <DataSet Name="SQL Data Source 1">
-          <View Name="Categories">
-            <Field Name="CategoryName" Type="String" />
-            <Field Name="ProductName" Type="String" />
-            <Field Name="UnitPrice" Type="Decimal" />
-            <Field Name="Quantity" Type="Int16" />
-            <Field Name="OrderDate" Type="DateTime" />
-            <Field Name="ShipRegion" Type="String" />
-            <Field Name="ShipCity" Type="String" />
-            <Field Name="ShipCountry" Type="String" />
-            <Field Name="CompanyName" Type="String" />
-            <Field Name="UnitsOnOrder" Type="Int16" />
-          </View>
-        </DataSet>
-      </ResultSchema>
-      <ConnectionOptions CloseConnection="true" />
-    </SqlDataSource>
+    <ExtractFileDataSource ComponentName="dashboardExtractDataSource1" Name="Sales Data">
+      <FileName>Data\SalesData.dat</FileName>
+      <ExtractSourceDataMember>Categories</ExtractSourceDataMember>
+      <ExtractSourceFilter></ExtractSourceFilter>
+      <NumberOfRows>-1</NumberOfRows>
+      <Parameters />
+      <SavedSchema>
+        <Column>
+          <Name>CategoryName</Name>
+          <Type>System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>ProductName</Name>
+          <Type>System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>UnitPrice</Name>
+          <Type>System.Decimal, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>Quantity</Name>
+          <Type>System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>OrderDate</Name>
+          <Type>System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>ShipRegion</Name>
+          <Type>System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>ShipCity</Name>
+          <Type>System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>ShipCountry</Name>
+          <Type>System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>CompanyName</Name>
+          <Type>System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+        <Column>
+          <Name>UnitsOnOrder</Name>
+          <Type>System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</Type>
+        </Column>
+      </SavedSchema>
+    </ExtractFileDataSource>
   </DataSources>
   <Items>
     <TabContainer ComponentName="tabContainerDashboardItem1" Name="Tab Container 1">
@@ -73,7 +61,7 @@
         <Page ComponentName="dashboardTabPage4" Name="Sales by company" />
       </Pages>
     </TabContainer>
-    <Pie ComponentName="pieDashboardItem1" Name="Orders by year" ParentContainer="dashboardTabPage1" DataSource="dashboardSqlDataSource1" DataMember="Categories">
+    <Pie ComponentName="pieDashboardItem1" Name="Orders by year" ParentContainer="dashboardTabPage1" DataSource="dashboardExtractDataSource1">
       <DataItems>
         <Dimension DataMember="CategoryName" DefaultId="DataItem0" />
         <Measure DataMember="UnitsOnOrder" DefaultId="DataItem1" />
@@ -89,7 +77,7 @@
         <Value DefaultId="DataItem1" />
       </Values>
     </Pie>
-    <Chart ComponentName="chartDashboardItem2" Name="Orders by date" ParentContainer="dashboardTabPage2" DataSource="dashboardSqlDataSource1" DataMember="Categories">
+    <Chart ComponentName="chartDashboardItem2" Name="Orders by date" ParentContainer="dashboardTabPage2" DataSource="dashboardExtractDataSource1">
       <ColoringOptions UseGlobalColors="false" />
       <DataItems>
         <Dimension DataMember="OrderDate" DateTimeGroupInterval="MonthYear" ColoringMode="Hue" DefaultId="DataItem0" />
@@ -109,7 +97,7 @@
       </Panes>
       <ChartLegend Visible="false" />
     </Chart>
-    <Treemap ComponentName="treemapDashboardItem1" Name="Product orders" ShowCaption="false" ParentContainer="dashboardTabPage1" DataSource="dashboardSqlDataSource1" DataMember="Categories" GroupsLabelContentType="ArgumentAndValue">
+    <Treemap ComponentName="treemapDashboardItem1" Name="Product orders" ShowCaption="false" ParentContainer="dashboardTabPage1" DataSource="dashboardExtractDataSource1" GroupsLabelContentType="ArgumentAndValue">
       <DataItems>
         <Dimension DataMember="ProductName" DefaultId="DataItem0" />
         <Measure DataMember="UnitsOnOrder" DefaultId="DataItem1" />
@@ -123,7 +111,7 @@
         <Argument DefaultId="DataItem0" />
       </Arguments>
     </Treemap>
-    <ScatterChart ComponentName="scatterChartDashboardItem1" Name="Orders by country" ShowCaption="false" ParentContainer="dashboardTabPage3" DataSource="dashboardSqlDataSource1" DataMember="Categories">
+    <ScatterChart ComponentName="scatterChartDashboardItem1" Name="Orders by country" ShowCaption="false" ParentContainer="dashboardTabPage3" DataSource="dashboardExtractDataSource1">
       <ColoringOptions UseGlobalColors="false" />
       <DataItems>
         <Measure DataMember="UnitsOnOrder" DefaultId="DataItem0" />
@@ -140,7 +128,7 @@
         <Dimension DefaultId="DataItem3" />
       </Dimensions>
     </ScatterChart>
-    <ChoroplethMap ComponentName="choroplethMapDashboardItem1" Name="Orders by country" ParentContainer="dashboardTabPage3" DataSource="dashboardSqlDataSource1" DataMember="Categories" AttributeName="NAME">
+    <ChoroplethMap ComponentName="choroplethMapDashboardItem1" Name="Orders by country" ParentContainer="dashboardTabPage3" DataSource="dashboardExtractDataSource1" AttributeName="NAME">
       <DataItems>
         <Dimension DataMember="ShipCountry" DefaultId="DataItem0" />
         <Measure DataMember="UnitsOnOrder" DefaultId="DataItem1" />
@@ -156,7 +144,7 @@
         </ValueMap>
       </Maps>
     </ChoroplethMap>
-    <Card ComponentName="cardDashboardItem1" Name="Order count by city" ParentContainer="dashboardTabPage3" DataSource="dashboardSqlDataSource1" DataMember="Categories">
+    <Card ComponentName="cardDashboardItem1" Name="Order count by city" ParentContainer="dashboardTabPage3" DataSource="dashboardExtractDataSource1">
       <DataItems>
         <Dimension DataMember="ShipCountry" TopNEnabled="true" TopNCount="4" TopNMeasure="DataItem1" DefaultId="DataItem0" />
         <Dimension DataMember="ShipCity" TopNEnabled="true" TopNMeasure="DataItem1" DefaultId="DataItem2" />
@@ -182,7 +170,7 @@
         </LayoutTemplate>
       </Card>
     </Card>
-    <Pie ComponentName="pieDashboardItem2" Name="Pies 1" ShowCaption="false" ParentContainer="dashboardTabPage4" DataSource="dashboardSqlDataSource1" DataMember="Categories">
+    <Pie ComponentName="pieDashboardItem2" Name="Pies 1" ShowCaption="false" ParentContainer="dashboardTabPage4" DataSource="dashboardExtractDataSource1">
       <ColoringOptions UseGlobalColors="false" />
       <DataItems>
         <Measure DataMember="Quantity" DefaultId="DataItem0" />
@@ -199,7 +187,7 @@
         <Value DefaultId="DataItem0" />
       </Values>
     </Pie>
-    <Card ComponentName="cardDashboardItem2" Name="Top 5 Companies" ParentContainer="dashboardTabPage4" DataSource="dashboardSqlDataSource1" DataMember="Categories" ContentArrangementMode="FixedColumnCount" ContentLineCount="1">
+    <Card ComponentName="cardDashboardItem2" Name="Top 5 Companies" ParentContainer="dashboardTabPage4" DataSource="dashboardExtractDataSource1" ContentArrangementMode="FixedColumnCount" ContentLineCount="1">
       <DataItems>
         <Dimension DataMember="CompanyName" TopNEnabled="true" TopNMeasure="DataItem1" DefaultId="DataItem0" />
         <Measure DataMember="Quantity" DefaultId="DataItem1" />

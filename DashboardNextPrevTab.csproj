@@ -103,6 +103,9 @@
     <EmbeddedResource Include="ViewerForm.resx">
       <DependentUpon>ViewerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Data\SalesData.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -118,9 +121,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dashboards\SalesDashboard.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Data\nwind.mdb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
