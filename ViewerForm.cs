@@ -33,7 +33,7 @@ namespace DashboardNextPrevTab {
             prevTabItem.SvgImage = imageCollection["Prev"];
             e.Items.Insert(0, prevTabItem);
 
-            DashboardToolbarItem showTabHederItem = new DashboardToolbarItem(TabContainer.ShowCaption, "Show//Hide tab headers", ShowHideTabHeadersItemClick);
+            DashboardToolbarItem showTabHederItem = new DashboardToolbarItem(TabContainer.ShowCaption, "Show tab headers", ShowHideTabHeadersItemClick);
             showTabHederItem.SvgImage = imageCollection["showcaption"];
             e.Items.Insert(0, showTabHederItem);
 
