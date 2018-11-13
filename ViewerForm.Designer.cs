@@ -41,9 +41,8 @@
             // 
             this.imageCollection.Add("Next", "image://svgimages/arrows/next.svg");
             this.imageCollection.Add("Prev", "image://svgimages/arrows/prev.svg");
-            this.imageCollection.Add("ShowCaption", "image://svgimages/diagramicons/snap to grid.svg");
             this.imageCollection.Add("Slideshow", "image://svgimages/icon builder/business_presentation.svg");
-            this.imageCollection.Add("showcaption", "image://svgimages/dashboards/showcaption.svg");
+            this.imageCollection.Add("ShowCaption", "image://svgimages/dashboards/showcaption.svg");
             // 
             // transitionManager
             // 

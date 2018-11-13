@@ -34,7 +34,7 @@ namespace DashboardNextPrevTab {
             e.Items.Insert(0, prevTabItem);
 
             DashboardToolbarItem showTabHederItem = new DashboardToolbarItem(TabContainer.ShowCaption, "Show tab headers", ShowHideTabHeadersItemClick);
-            showTabHederItem.SvgImage = imageCollection["showcaption"];
+            showTabHederItem.SvgImage = imageCollection["ShowCaption"];
             e.Items.Insert(0, showTabHederItem);
 
             DashboardToolbarItem slideShowItem = new DashboardToolbarItem(slideShowTimer.Enabled, "Slideshow", SlideShowItemClick);
